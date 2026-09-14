@@ -1,0 +1,11 @@
+EduTest final pre-publish checklist
+1. Run supabase-schema.sql.
+2. Create the first Auth user in Supabase and insert it into profiles as role=master.
+3. Deploy functions/manage-admin/index.ts as Edge Function named manage-admin.
+4. Set Edge Function server secret SUPABASE_SERVICE_ROLE_KEY. Never commit it.
+5. Put only Project URL + anon/publishable key in supabase-config.js.
+6. Upload the frontend files to GitHub Pages.
+7. Test master login.
+8. From Master Admin create a normal admin.
+9. Test normal admin login and confirm it cannot see another admin's records.
+10. Publish an exam and test the public exam.

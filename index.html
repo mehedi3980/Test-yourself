@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EduTest — Online Exam</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-dot"></span> EduTest</div>
+  <div class="top-actions">
+    <button id="themeBtn" class="icon-btn" title="Toggle theme">☾</button>
+    <a href="login.html" class="admin-link">Admin</a>
+  </div>
+</header>
+<main class="container">
+  <section id="home" class="hero">
+    <div>
+      <span class="eyebrow">ONLINE LEARNING PLATFORM</span>
+      <h1>Practice. Test. <span>Improve.</span></h1>
+      <p>Take a timed practice exam, answer questions, and get your result instantly.</p>
+    </div>
+  </section>
+
+  <section class="exam-card">
+    <div class="exam-head">
+      <div>
+        <span class="tag">PRACTICE TEST</span>
+        <h2 id="examTitle">English Random Practice Test</h2>
+        <p id="examMeta">30 MCQs • 20 minutes • 10 questions per page</p>
+      </div>
+      <button id="startBtn" class="primary">Start Exam →</button>
+    </div>
+  </section>
+
+  <section id="examArea" class="hidden">
+    <div class="exam-toolbar">
+      <div><strong id="progressText">Question 1 of 30</strong><div class="progress"><span id="progressBar"></span></div></div>
+      <div id="timer" class="timer">20:00</div>
+    </div>
+    <div id="questionGrid" class="question-grid"></div>
+    <div id="questions"></div>
+    <div class="nav-row">
+      <button id="prevBtn" class="secondary">← Previous</button>
+      <button id="nextBtn" class="primary">Next →</button>
+      <button id="submitBtn" class="danger hidden">Submit Exam</button>
+    </div>
+  </section>
+
+  <section id="result" class="result-card hidden">
+    <div class="result-icon">✓</div>
+    <h2>Exam Complete</h2>
+    <div id="score" class="score">0%</div>
+    <p id="resultText"></p>
+    <button id="reviewBtn" class="secondary">Review Answers</button>
+    <button id="restartBtn" class="primary">Try Again</button>
+  </section>
+
+  <section id="review" class="hidden">
+    <h2>Answer Review</h2>
+    <div id="reviewList"></div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="questions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EduTest Admin Login</title><link rel="stylesheet" href="style.css"></head><body><header class="topbar"><a class="brand" href="index.html"><span class="brand-dot"></span> EduTest</a></header><main class="login-wrap"><form id="loginForm" class="login-card"><h1>Admin Login</h1><p>Sign in with your username and password.</p><div class="field"><label>Username</label><input id="username" required autocomplete="username"></div><div class="field"><label>Password</label><input id="password" type="password" required autocomplete="current-password"></div><div id="msg" class="notice hidden"></div><button class="primary" style="width:100%">Login</button><p style="font-size:13px;color:#697386">Master Admin and normal Admin accounts use the same login page. Access is decided securely by the account role.</p></form></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script>
+const {createClient}=supabase; const sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const msg=document.getElementById("msg");
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();msg.classList.add("hidden");
+ const u=username.value.trim().toLowerCase(), p=password.value;
+ const {data,error}=await sb.rpc("resolve_username",{p_username:u});
+ if(error||!data){msg.textContent="Username or password is incorrect.";msg.classList.remove("hidden");return}
+ const {error:loginErr}=await sb.auth.signInWithPassword({email:data,password:p});
+ if(loginErr){msg.textContent="Username or password is incorrect.";msg.classList.remove("hidden");return}
+ const {data:profile}=await sb.from("profiles").select("role,active").eq("id",(await sb.auth.getUser()).data.user.id).single();
+ if(!profile?.active){await sb.auth.signOut();msg.textContent="This account is disabled.";msg.classList.remove("hidden");return}
+ location.href=profile.role==="master"?"master.html":"admin.html";
+});
+</script></body></html>
